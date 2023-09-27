@@ -11,11 +11,11 @@
         android:id="@+id/btnSave"
         android:layout_width="153dp"
         android:layout_height="55dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="184dp"
         android:text="Salvar"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,14 +23,68 @@
         android:id="@+id/btnCancel"
         android:layout_width="153dp"
         android:layout_height="55dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="184dp"
         android:text="Cancelar"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Texto para inserir na lista:"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/meuCampoDeEntrada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Digite aqui"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <RadioGroup
+        android:id="@+id/colorsRadio"
+        android:layout_width="328dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meuCampoDeEntrada">
+
+        <RadioButton
+            android:id="@+id/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verde" />
+
+        <RadioButton
+            android:id="@+id/red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vermelho" />
+
+        <RadioButton
+            android:id="@+id/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Azul" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
