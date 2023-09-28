@@ -1,4 +1,4 @@
-package ifsp.chiquetano;
+package ifsp.chiquetano.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+import ifsp.chiquetano.model.Item;
+import ifsp.chiquetano.repository.DatabaseHelper;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
 

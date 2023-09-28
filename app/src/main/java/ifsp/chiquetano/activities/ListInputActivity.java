@@ -1,6 +1,5 @@
-package ifsp.chiquetano;
+package ifsp.chiquetano.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.graphics.Color;
+import ifsp.chiquetano.repository.DatabaseHelper;
+import ifsp.chiquetano.R;
 
 public class ListInputActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package ifsp.chiquetano;
+package ifsp.chiquetano.model;
 
 import android.graphics.Color;
 

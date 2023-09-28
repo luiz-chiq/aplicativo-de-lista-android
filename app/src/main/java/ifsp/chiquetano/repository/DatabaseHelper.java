@@ -1,4 +1,4 @@
-package ifsp.chiquetano;
+package ifsp.chiquetano.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,11 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-class DatabaseHelper extends SQLiteOpenHelper {
+import ifsp.chiquetano.model.Item;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "List.db";
@@ -21,7 +22,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TEXT = "text";
     private static final String COLOR = "color";
 
-    DatabaseHelper(@Nullable Context context) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -76,7 +77,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    void deleteItem(String id){
+    public void deleteItem(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{id});
         if(result == -1){
