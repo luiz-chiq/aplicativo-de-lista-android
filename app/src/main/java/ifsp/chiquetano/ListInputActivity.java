@@ -1,5 +1,6 @@
 package ifsp.chiquetano;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -48,28 +49,12 @@ public class ListInputActivity extends AppCompatActivity {
 
                 String text = editText.getText().toString();
                 int colorIndex = radioGroup.getCheckedRadioButtonId();
-                int color;
-                if (colorIndex == R.id.green) {
-                    color = Color.GREEN;
-                } else if (colorIndex == R.id.red) {
-                    color = Color.RED;
-                } else if (colorIndex == R.id.blue) {
-                    color = Color.BLUE;
-                } else {
-                    color = Color.BLACK;
-                }
+                int color = getColor(colorIndex);
 
-                String message = "";
-                if (text.equals("")) message += "Digite algum texto!";
-
-                if (color == Color.BLACK) {
-                    if (!message.isEmpty()) message += "\n";
-                    message += "Obrigatório escolher uma cor";
-                }
+                String message = createMessage(text, color);
 
                 if (!message.isEmpty()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -80,6 +65,33 @@ public class ListInputActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListInputActivity.this, MainActivity.class);
                 startActivity(intent);
             }
+
+            private int getColor(int colorIndex) {
+                int color;
+                if (colorIndex == R.id.green) {
+                    color = Color.GREEN;
+                } else if (colorIndex == R.id.red) {
+                    color = Color.RED;
+                } else if (colorIndex == R.id.blue) {
+                    color = Color.BLUE;
+                } else {
+                    color = Color.BLACK;
+                }
+                return color;
+            }
+
+            private String createMessage(String text, int color) {
+                String message = "";
+                if (text.equals("")) message += "Digite algum texto!";
+
+                if (color == Color.BLACK) {
+                    if (!message.isEmpty()) message += "\n";
+                    message += "Obrigatório escolher uma cor";
+                }
+                return message;
+            }
         });
     }
+
+
 }
