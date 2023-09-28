@@ -10,9 +10,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.graphics.Color;
 import android.widget.Toast;
-
-
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -57,20 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 Item item = adapter.getItem(position);
                 if (item != null) {
                     String text = item.text;
-                    String color;
-                    switch (item.color){
-                        case Color.RED:
-                            color = "VERMELHO";
-                            break;
-                        case Color.BLUE:
-                            color = "AZUL";
-                            break;
-                        case Color.GREEN:
-                            color = "VERDE";
-                            break;
-                        default:
-                            color = "INDEFINIDO";
-                    }
+                    String color = getColor(item);
                     String message = "Texto: " + text + "\nCor: " + color;
                     Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
@@ -86,6 +70,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private static String getColor(Item item) {
+        String color;
+        switch (item.color){
+            case Color.RED:
+                color = "VERMELHO";
+                break;
+            case Color.BLUE:
+                color = "AZUL";
+                break;
+            case Color.GREEN:
+                color = "VERDE";
+                break;
+            default:
+                color = "INDEFINIDO";
+        }
+        return color;
     }
 
 
