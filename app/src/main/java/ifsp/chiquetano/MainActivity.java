@@ -1,11 +1,13 @@
 package ifsp.chiquetano;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +17,12 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private ListView listView;
 
-    private ArrayList<String> items = new ArrayList<>();
+    private ArrayList<String> items;
 
-    ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> arrayAdapter;
+
+    SQLiteDatabase bd;
+
 
 
     @Override
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         button = findViewById( R.id.btnAddItem );
         listView = findViewById( R.id.listView );
+
+
+        MyDatabaseHelper db = new MyDatabaseHelper(MainActivity.this);
+
+        items = db.getItems();
 
         button.setOnClickListener( new View.OnClickListener() {
             @Override
