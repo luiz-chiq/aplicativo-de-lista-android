@@ -73,7 +73,7 @@ public class ListInputActivity extends AppCompatActivity {
                     return;
                 }
 
-                MyDatabaseHelper db = new MyDatabaseHelper(ListInputActivity.this);
+                DatabaseHelper db = new DatabaseHelper(ListInputActivity.this);
 
                 db.addItem(text, color);
 

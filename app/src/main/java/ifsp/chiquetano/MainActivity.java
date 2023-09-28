@@ -2,13 +2,17 @@ package ifsp.chiquetano;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.graphics.Color;
 import android.widget.Toast;
 
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -17,13 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private ListView listView;
 
-    private ArrayList<String> items;
-
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<Item> items;
 
     SQLiteDatabase bd;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById( R.id.listView );
 
 
-        MyDatabaseHelper db = new MyDatabaseHelper(MainActivity.this);
+        DatabaseHelper db = new DatabaseHelper(MainActivity.this);
 
         items = db.getItems();
 
+        ItemAdapter adapter = new ItemAdapter(this, items, db);
+
+        listView.setAdapter( adapter );
         button.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +50,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, items);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        listView.setAdapter( arrayAdapter );
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item item = adapter.getItem(position);
+                if (item != null) {
+                    String text = item.text;
+                    String color;
+                    switch (item.color){
+                        case Color.RED:
+                            color = "VERMELHO";
+                            break;
+                        case Color.BLUE:
+                            color = "AZUL";
+                            break;
+                        case Color.GREEN:
+                            color = "VERDE";
+                            break;
+                        default:
+                            color = "INDEFINIDO";
+                    }
+                    String message = "Texto: " + text + "\nCor: " + color;
+                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.removeItem(position);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
 
     }
 
