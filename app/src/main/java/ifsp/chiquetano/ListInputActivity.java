@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.graphics.Color;
 
 public class ListInputActivity extends AppCompatActivity {
 
@@ -47,21 +48,21 @@ public class ListInputActivity extends AppCompatActivity {
 
                 String text = editText.getText().toString();
                 int colorIndex = radioGroup.getCheckedRadioButtonId();
-                String color;
+                int color;
                 if (colorIndex == R.id.green) {
-                    color = "green";
+                    color = Color.GREEN;
                 } else if (colorIndex == R.id.red) {
-                    color = "red";
+                    color = Color.RED;
                 } else if (colorIndex == R.id.blue) {
-                    color = "blue";
+                    color = Color.BLUE;
                 } else {
-                    color = null;
+                    color = Color.BLACK;
                 }
 
                 String message = "";
                 if (text.equals("")) message += "Digite algum texto!";
 
-                if (color == null) {
+                if (color == Color.BLACK) {
                     if (!message.isEmpty()) message += "\n";
                     message += "Obrigatório escolher uma cor";
                 }
@@ -72,6 +73,9 @@ public class ListInputActivity extends AppCompatActivity {
                     return;
                 }
 
+                MyDatabaseHelper db = new MyDatabaseHelper(ListInputActivity.this);
+
+                db.addItem(text, color);
 
                 Intent intent = new Intent(ListInputActivity.this, MainActivity.class);
                 startActivity(intent);
