@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-class MyDatabaseHelper extends SQLiteOpenHelper {
+class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "List.db";
@@ -21,7 +21,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TEXT = "text";
     private static final String COLOR = "color";
 
-    MyDatabaseHelper(@Nullable Context context) {
+    DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -52,7 +52,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList getItems(){
+    public ArrayList<Item> getItems(){
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -61,18 +61,17 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(query, null);
         }
 
-        ArrayList list = new ArrayList<String>();
+        ArrayList list = new ArrayList<Item>();
         if (cursor.getCount() == 0){
             return list;
         }
 
         while (cursor.moveToNext()){
-//            Item item = new Item(
-//                    cursor.getInt(0),
-//                    cursor.getString(1),
-//                    cursor.getInt(2));
-//            list.add(item);
-            list.add(cursor.getString(1));
+            Item item = new Item(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2));
+            list.add(item);
         }
         return list;
     }
